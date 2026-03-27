@@ -4,29 +4,49 @@ Welcome to the official documentation for **ArchCosta OS**.
 
 ## Introduction
 
-ArchCosta is a professional, performance-tuned distribution based on Arch Linux. It is designed for low-end systems while providing a feature-rich desktop experience with multiple desktop environment options.
+ArchCosta is a professional, performance-tuned distribution based on Arch Linux. It offers a feature-rich desktop experience with multiple desktop environment and window manager options.
 
 ## Key Features
 
-- **Multiple Desktop Environments:** Choose from Cinnamon, XFCE, MATE, or Plasma
+- **Multiple Desktop Environments:** XFCE, Cinnamon, MATE, Plasma, GNOME
+- **Window Managers:** Hyprland, Sway, Bspwm, Openbox, Wayfire, River, Niri, i3wm
+- **Premium Theming:** Auto-generated colors from wallpaper (pywal), dark minimal aesthetic
+- **17 Curated Wallpapers:** High-quality 4K wallpapers for all environments
 - **Performance Optimized:** Custom kernel tweaks and system optimizations
-- **LightDM Greeter:** Beautiful login screen with auto-login support
+- **LightDM/SwayDM:** Beautiful login screens with auto-login support
 - **Calamares Installer:** Easy installation with guided steps
 - **Rolling Release:** Always up-to-date with the latest Arch packages
+- **Dracut Support:** Modern initramfs generation for installed systems
 
-## Supported Desktop Environments
+## Supported Environments
 
-### Cinnamon
-A modern desktop featuring a traditional layout with an innovative window list applet.
+### Desktop Environments
 
-### XFCE
-A lightweight and fast desktop environment ideal for older hardware.
+| DE | Description |
+|----|-------------|
+| XFCE | Lightweight and fast, ideal for older hardware |
+| Cinnamon | Modern desktop with innovative features |
+| MATE | Traditional desktop derived from GNOME 2 |
+| Plasma | Feature-rich with extensive customization |
+| GNOME | Modern, full-featured desktop |
 
-### MATE
-A traditional desktop environment derived from GNOME 2.
+### Window Managers (Wayland)
 
-### Plasma (KDE)
-A feature-rich desktop with modern aesthetics and extensive customization.
+| WM | Description |
+|----|-------------|
+| Hyprland | Modern Wayland compositor with rich features |
+| Sway | i3-compatible Wayland compositor |
+| River | Dynamic tiling compositor |
+| Niri | Scrollable-tiling compositor |
+| Wayfire | Compositor with 3D effects |
+
+### Window Managers (X11)
+
+| WM | Description |
+|----|-------------|
+| Bspwm | Minimal floating/tiling window manager |
+| Openbox | Highly configurable window manager |
+| i3wm | Tiling window manager |
 
 ## Installation
 
@@ -39,23 +59,34 @@ A feature-rich desktop with modern aesthetics and extensive customization.
 
 ### Installation Steps
 
-1. Download the latest ArchCosta ISO
-2. Create a bootable USB using dd or Rufus
-3. Boot from USB and select "ArchCosta Linux (Standard)"
+1. Download the latest ArchCosta ISO from GitHub Releases
+2. Create a bootable USB using `dd` or Rufus
+3. Boot from USB and select ArchCosta
 4. The Live environment will load automatically
 5. Double-click "Install ArchCosta" on the desktop
 6. Follow the Calamares installer steps
-7. Choose your preferred desktop environment
+7. Choose your preferred desktop environment or window manager
 8. Complete the installation and reboot
 
-## Desktop Environment Selection
+## Building the ISO
 
-During installation, you can choose from:
+### Build Options
 
-- **ArchCosta Cinnamon** - Modern and innovative
-- **ArchCosta XFCE** - Lightweight and fast
-- **ArchCosta MATE** - Traditional and stable
-- **ArchCosta Plasma** - Feature-rich and customizable
+```bash
+# Clone the repository
+git clone https://github.com/archcosta-os/archcosta.git
+cd archcosta
+
+# Build ISO (select DE/WM)
+mkarchiso -v -w /tmp/work -o /tmp/out .
+```
+
+### Build Flavors
+
+Available in GitHub Actions workflow:
+- xfce, plasma, cinnamon, mate, gnome
+- hyprland, sway, bspwm, openbox
+- wayfire, river, niri, i3wm
 
 ## Post-Installation
 
@@ -64,35 +95,17 @@ During installation, you can choose from:
 sudo pacman -Syu
 ```
 
-### Install AUR Helper (Optional)
+### Boot Configuration
 ```bash
-# Install yay
-sudo pacman -S yay
-```
+# Regenerate GRUB
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-### Install Drivers
-
-**NVIDIA:**
-```bash
-sudo pacman -S nvidia nvidia-utils
-```
-
-**AMD:**
-```bash
-sudo pacam -S xf86-video-amdgpu
-```
-
-## Troubleshooting
-
-### No Sound
-```bash
-# Install pipewire
-sudo pacman -S pipewire pipewire-alsa pipewire-pulse
+# For dracut (if using)
+sudo dracut --force --regenerate-all
 ```
 
 ### Network Issues
 ```bash
-# Restart NetworkManager
 sudo systemctl restart NetworkManager
 ```
 
@@ -100,9 +113,9 @@ sudo systemctl restart NetworkManager
 
 - **GitHub Organization:** https://github.com/archcosta-os
 - **Main Repository:** https://github.com/archcosta-os/archcosta
-- **Packages Repository:** https://github.com/archcosta-os/archcosta-pkgbuilds
+- **Packages (PKGBUILDs):** https://github.com/archcosta-os/archcosta-pkgbuilds
+- **Custom Repo:** https://github.com/archcosta-os/archcosta-repo
 - **Issue Tracker:** https://github.com/archcosta-os/archcosta/issues
-- **Wiki:** https://github.com/archcosta-os/archcosta-wiki
 
 ## License
 
